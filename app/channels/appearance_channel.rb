@@ -5,18 +5,25 @@ class AppearanceChannel < ApplicationCable::Channel
   end
 
   def unsubscribed
-    # Maybe read a cookie?
+    away
   end
 
   def appear(data)
-    name = data['name']
-    current_user = User.find_or_create_by(name: name)
-    current_user.appear(name)
-    ActionCable.server.broadcast('appearances',
-                                 user: { name: current_user.name })
+    load_user(data['name'])
+    @current_user.appear
+    ActionCable.server.broadcast('appearances', user: @current_user)
   end
 
   def away
-    current_user.away
+    return unless @current_user
+
+    @current_user.away
+    ActionCable.server.broadcast('appearances', user: @current_user)
+  end
+
+  private
+
+  def load_user(name)
+    @current_user = User.find_or_create_by(name: name)
   end
 end

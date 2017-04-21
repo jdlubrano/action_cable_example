@@ -6,6 +6,6 @@ Username: <input type="text" name="username"/>
 <h2>Users Chatting</h2>
 <ul class="user-list">
   <% @users.each do |user| %>
-    <li><%= user.name %></li>
+    <li data-user-id="<%= user.id %>"><%= user.name %></li>
   <% end %>
 </ul>

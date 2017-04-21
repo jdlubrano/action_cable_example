@@ -1,7 +1,5 @@
 module ApplicationCable
   class Connection < ActionCable::Connection::Base
-    attr_accessor :current_user
-
     identified_by :client_ip
 
     def connect

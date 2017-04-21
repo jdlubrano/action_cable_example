@@ -1,9 +1,9 @@
 class User < ApplicationRecord
-  def appear(name)
-    update!(name: name, active: true) unless active?
+  def appear
+    update!(active: true)
   end
 
   def away
-    update!(active: false) if active?
+    update!(active: false)
   end
 end

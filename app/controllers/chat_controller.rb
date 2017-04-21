@@ -1,5 +1,5 @@
 class ChatController < ApplicationController
   def index
-    @users = User.all
+    @users = User.where(active: true)
   end
 end
